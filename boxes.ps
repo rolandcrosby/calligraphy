@@ -1,0 +1,64 @@
+%%DocumentMedia: a5 420 595 80 () ()
+%%BoundingBox: 0 0 420 595
+/w 420 def
+/h 595 def
+<< /PageSize [w h] >> setpagedevice
+
+/tan {dup sin exch cos div} def
+/mm {72 mul 25.4 div} def
+
+/grid 5 mm def
+/margin grid def
+/angle 55 def
+/desc 1.5 grid mul def
+/xheight grid def
+/asc desc def
+/xgrid xheight 1.5 mul def
+
+/box {
+  /y0 exch def
+  /x0 exch def
+
+  0.5 setlinewidth
+
+  x0 y0 moveto
+  bw 0 rlineto
+  0 bh rlineto
+  bw neg 0 rlineto
+  closepath
+  stroke
+
+  1 setlinewidth
+
+  x0 y0 desc add moveto
+  bw 0 rlineto
+  stroke
+
+
+  x0 y0 desc add xheight add moveto
+  bw 0 rlineto
+  stroke
+
+  2 setlinewidth
+  0 xgrid bw dx sub {
+    margin add y0 moveto
+    dx bh rlineto
+    stroke
+  } for
+
+} def
+
+/bh desc xheight asc add add def
+/bw w margin 2 mul sub def
+/dx bh angle tan div def
+% max boxes on a page = (page height - margin) / (box height incl bottom margin)
+/boxes h margin sub bh margin add div def
+1 1 boxes {
+  % bottom left corner of box = page height - ((top margin + box height) * box no.)
+  margin bh add mul h exch sub
+  margin exch
+  box
+} for
+
+showpage
+

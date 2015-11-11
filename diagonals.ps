@@ -1,0 +1,23 @@
+%%DocumentMedia: a5 420 595 80 () ()
+%%BoundingBox: 0 0 420 595
+/w 420 def
+/h 595 def
+<< /PageSize [w h] >> setpagedevice
+
+/tan {dup sin exch cos div} def
+/mm {72 mul 25.4 div} def
+
+/grid 5 mm def
+2 setlinewidth
+/angle 55 def
+
+/dx h angle tan div def
+
+w neg grid w {
+  0 moveto
+  dx h rlineto
+  stroke
+} for
+
+showpage
+
